@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class mObservePattern_printer : MonoBehaviour
+public class mObserver_printer : MonoBehaviour
 {
     private mSubject<string> _mSubject;
     private mObserver_print<string> _mObserver;
 
     private void Start()
     {
-        //Subject作成
+        //Subject（管理者）作成
         _mSubject = new mSubject<string>();
-        //Observer作成
+        //Observer（被管理者）作成
         _mObserver = new mObserver_print<string>();
 
         //購読
@@ -35,6 +35,5 @@ public class mObservePattern_printer : MonoBehaviour
         
         //片付け
         _mSubject.Dispose();
-        _mObserver = null;
     }
 }

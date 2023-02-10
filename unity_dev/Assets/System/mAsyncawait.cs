@@ -8,10 +8,14 @@ public class mAsyncawait : MonoBehaviour
 {
     private bool _end = false;
     private float _count = 0.0f;
+    private CancellationTokenSource _cts;
 
     void Start()
     {
-        ASyncTests();
+        _cts = new CancellationTokenSource(); //token元を生成。
+        var token = _cts.Token; //tokenを生成。
+        //var token = this.GetCancellationTokenOnDestroy(); //OnDestroy()時にキャンセルされるtokenを生成。
+        ASyncTests(token);
     }
 
     private void Update()
@@ -22,20 +26,23 @@ public class mAsyncawait : MonoBehaviour
             GenerateCube(token, _count).Forget();
             _count += 1.1f;
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            _cts.Cancel();
+            Debug.Log("stop.");
+        }
     }
 
-    private void ASyncTests()
+    private void ASyncTests(CancellationToken token)
     {
         //同じスレッドで並列処理。
         //awaitで待機しない場合は、Forget()で警告回避出来る。
-        AsyncTest().Forget();
-        AsyncTest2().Forget();
+        //AsyncTest().Forget();
+        //AsyncTest2().Forget();
 
-        ThreadTests().Forget();
+        //ThreadTests().Forget();
 
-        var cts = new CancellationTokenSource(); //token元を生成。
-        //var token = cts.Token; //tokenを生成。
-        var token = this.GetCancellationTokenOnDestroy(); //OnDestroy()時にキャンセルされるtokenを生成。
         AsyncTest_cancellation(token).Forget();
     }
 
@@ -92,10 +99,14 @@ public class mAsyncawait : MonoBehaviour
     {
         while (true)
         {
+            /*
             Debug.Log("cancellationTest1_start.: " + Thread.CurrentThread.ManagedThreadId);
             await UniTask.Delay(1000, cancellationToken: token); //tokenを引数に与える。(このawait以降は実行されない)
             Debug.Log("cancellationTest1_end.: " + Thread.CurrentThread.ManagedThreadId);
             await UniTask.Delay(500, cancellationToken: token); //同上
+            */
+            Debug.Log("test.");
+            await UniTask.Delay(1000, cancellationToken: token);
         }
     }
 

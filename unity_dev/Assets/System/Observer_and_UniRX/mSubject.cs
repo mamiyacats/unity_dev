@@ -5,17 +5,17 @@ using UnityEngine;
 
 public class mSubject<T> : IDisposable
 {
-    private List<IObserver<T>> _observers = new();
+    private List<ImObserver<T>> _observers = new();
 
     
     //Observerを登録（購読）する
-    public void RegisterObserver(IObserver<T> observer)
+    public void RegisterObserver(ImObserver<T> observer)
     {
         _observers.Add(observer);
     }
 
     //Observerを登録（購読）解除する
-    public void UnRegisterObserver(IObserver<T> observer)
+    public void UnRegisterObserver(ImObserver<T> observer)
     {
         _observers.Remove(observer);
     }
