@@ -1,0 +1,17 @@
+{
+    "name": "com.independent.tools",
+    "displayName": "aiya tools",
+    "description": "It's miscellaneous and varied.",
+    "version": "0.0.1", 
+    "author": "mao mamiya",
+    "unity": "2022.2",
+    "keywords": [
+      "unity"  
+    ],
+    "license": "MIT", 
+    "homepage": "", 
+    "repository": {
+      "type": "git", 
+      "url": "https://github.com/mamiyacats/unity_dev" 
+    }
+  }
